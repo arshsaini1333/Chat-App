@@ -1,10 +1,12 @@
 import logo from "../assets/logo.svg";
 // import { handleChange, handleSubmit, stateVar } from "../Utils/Register";
 import { handleValidation } from "../Utils/Register";
+import { registerRoute } from "../Utils/APIRoutes";
 import "../public/Register.css";
 import { useState, useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 export default function Register() {
   const [values, setValues] = useState({
     username: "",
@@ -14,13 +16,16 @@ export default function Register() {
   });
 
   const handleChange = (event) => {
-    //console.log(event.target.value);
     setValues({ ...values, [event.target.name]: event.target.value });
   };
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (handleValidation(values)) {
-      console.log(values);
+      const { data } = await axios.post(registerRoute, {
+        username,
+        email,
+        password,
+      });
     }
   };
 
