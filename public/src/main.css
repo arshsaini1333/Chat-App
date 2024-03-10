@@ -13,5 +13,5 @@ button {
 body {
   max-height: 100vh;
   overflow: hidden;
-  max-width: 100vh;
+  max-width: 100%;
 }

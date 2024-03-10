@@ -1,7 +1,8 @@
 .Register {
   background-color: pink;
-  height: 100vh;
-  width: 100vh;
+  padding: 50px;
+  /* height: 100vh;
+  width: 100vh; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -10,23 +11,23 @@
   background-color: #131324;
 }
 
-.brand {
+.Register .brand {
   display: flex;
   align-items: center;
   gap: 1rem;
   justify-content: center;
 }
 
-img {
+.Register img {
   height: 5rem;
 }
 
-h1 {
+.Register h1 {
   color: white;
   text-transform: uppercase;
 }
 
-form {
+.Register form {
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -35,7 +36,7 @@ form {
   padding: 3rem 5rem;
 }
 
-input {
+.Register input {
   background-color: transparent;
   padding: 1rem;
   border: 0.1rem solid #4e0eff;
@@ -51,7 +52,7 @@ input {
   }
 }
 
-button {
+.Register button {
   background-color: #4e0eff;
   color: white;
   padding: 1rem 2rem;
@@ -67,6 +68,14 @@ button {
   }
 }
 
-span {
+.Register span {
   color: white;
+  text-transform: uppercase;
+}
+
+.Register a {
+  color: #4e0eff;
+  text-transform: none;
+  font-weight: bold;
+  text-decoration: none;
 }
