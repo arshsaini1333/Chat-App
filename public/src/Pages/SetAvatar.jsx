@@ -9,11 +9,21 @@ import { toastOpt } from "../Utils/Register";
 import { Buffer } from "buffer";
 
 export default function SetAvatar() {
+  const navigate = useNavigate();
+
   const [avatars, setAvatars] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedAvatar, setSelectedAvatar] = useState(undefined);
+  useEffect(() => {
+    const avatarfun = async () => {
+      if (!localStorage.getItem("chat-app-user")) {
+        navigate("/login");
+      }
+    };
+    avatarfun();
+  }, []);
+
   const api = "https://api.multiavatar.com/45678945";
-  const navigate = useNavigate();
   const setProfilePicture = async () => {
     if (selectedAvatar === undefined) {
       toast.error("Please Select an avatar", toastOpt);
