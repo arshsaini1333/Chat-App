@@ -1,14 +1,4 @@
-import { toast, ToastContainer } from "react-toastify";
-
-// export const handleChange = (event) => {
-//   //console.log(event.target.value);
-//   setValues({ ...values, [event.target.name]: event.target.value });
-// };
-// export const handleSubmit = (event) => {
-//   event.preventDefault();
-//   console.log(values);
-//   alert("Form");
-// };
+import { toast } from "react-toastify";
 
 const toastOpt = {
   position: "bottom-right",

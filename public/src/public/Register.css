@@ -1,8 +1,9 @@
 .Register {
   background-color: pink;
-  padding: 50px;
-  /* height: 100vh;
-  width: 100vh; */
+  /* padding: 25% 5%; */
+  height: 100vh;
+  padding: 20px;
+  /* width: 100vh; */
   display: flex;
   flex-direction: column;
   justify-content: center;
