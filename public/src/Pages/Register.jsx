@@ -2,7 +2,7 @@ import RegisterForm from "../Components/RegisterForm";
 import { handleValidation, toastOpt } from "../Utils/Register";
 import { useNavigate } from "react-router-dom";
 import { registerRoute } from "../Utils/APIRoutes";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
@@ -16,7 +16,11 @@ export default function Register() {
     password: "",
     confirmPassword: "",
   });
-
+  useEffect(() => {
+    if (localStorage.getItem("chat-aap-user")) {
+      navigate("/");
+    }
+  }, []);
   //Handle input Changes
   const handleChange = (event) => {
     setValues({ ...values, [event.target.name]: event.target.value });
