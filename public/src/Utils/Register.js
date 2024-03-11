@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 
-const toastOpt = {
+export const toastOpt = {
   position: "bottom-right",
   autoClose: 8000,
   pauseOnHover: true,
@@ -8,6 +8,7 @@ const toastOpt = {
   theme: "dark",
 };
 
+//Handle Date Validation
 export const handleValidation = (values) => {
   const { password, confirmPassword, username, email } = values;
   if (username.length < 5) {
