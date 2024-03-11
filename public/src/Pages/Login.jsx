@@ -17,7 +17,7 @@ export default function Login() {
     confirmPassword: "",
   });
   useEffect(() => {
-    if (localStorage.getItem("chat-aap-user")) {
+    if (localStorage.getItem("chat-app-user")) {
       navigate("/");
     }
   }, []);
@@ -38,7 +38,7 @@ export default function Login() {
       if (!data.status) {
         toast.error(data.msg, toastOpt);
       } else {
-        localStorage.setItem("chat-aap-user", JSON.stringify(data.user));
+        localStorage.setItem("chat-app-user", JSON.stringify(data.user));
         navigate("/");
       }
     }
