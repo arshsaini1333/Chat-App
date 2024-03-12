@@ -12,16 +12,15 @@ export default function Login() {
   //State Variable
   const [values, setValues] = useState({
     username: "",
-    email: "",
+
     password: "",
-    confirmPassword: "",
   });
   useEffect(() => {
-    if (localStorage.getItem("chat-app-user")) {
+    if (localStorage.getItem("chat-aap-user")) {
       navigate("/");
     }
   }, []);
-  //Handle input Changes
+  //Handle input Change
   const handleChange = (event) => {
     setValues({ ...values, [event.target.name]: event.target.value });
   };
@@ -38,8 +37,13 @@ export default function Login() {
       if (!data.status) {
         toast.error(data.msg, toastOpt);
       } else {
-        localStorage.setItem("chat-app-user", JSON.stringify(data.user));
-        navigate("/");
+        localStorage.setItem("chat-aap-user", JSON.stringify(data.user));
+        let currUser = await JSON.parse(localStorage.getItem("chat-aap-user"));
+        if (currUser.isAvatarImageSet) {
+          navigate("/");
+        } else {
+          navigate("/setAvatar");
+        }
       }
     }
   };

@@ -10,14 +10,15 @@ export default function Chat() {
   const [contacts, setContacts] = useState([]);
   const [currUser, setCurrUser] = useState(undefined);
   const navigate = useNavigate();
+  const [currChat, setCurrChat] = useState(undefined);
 
   //If there is no user Return to the Login Page
   useEffect(() => {
     const currUserIn = async () => {
-      if (!localStorage.getItem("chat-app-user")) {
+      if (!localStorage.getItem("chat-aap-user")) {
         navigate("/login");
       } else {
-        setCurrUser(await JSON.parse(localStorage.getItem("chat-app-user")));
+        setCurrUser(await JSON.parse(localStorage.getItem("chat-aap-user")));
       }
     };
     currUserIn();
@@ -28,19 +29,24 @@ export default function Chat() {
     let contactList = async () => {
       if (currUser) {
         const data = await axios.get(`${allUsersRoute}/${currUser._id}`);
-
         setContacts(data.data);
-      } else {
-        navigate("/setAvatar");
       }
     };
     contactList();
   }, []);
+
+  const handleChatChange = (chat) => {
+    setCurrChat(chat);
+  };
   return (
     <>
       <div className="Chat">
         <div className="container">
-          <Contacts contacts={contacts} currUser={currUser} />
+          <Contacts
+            contacts={contacts}
+            currUser={currUser}
+            handleChatChange={handleChatChange}
+          />
         </div>
       </div>
     </>

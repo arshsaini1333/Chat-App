@@ -40,7 +40,7 @@ export default function Register() {
         toast.error(data.msg, toastOpt);
       } else {
         localStorage.setItem("chat-aap-user", JSON.stringify(data.user));
-        navigate("/");
+        navigate("/setAvatar");
       }
     }
   };

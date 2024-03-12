@@ -44,12 +44,11 @@ module.exports.setAvatar = async (req, res, next) => {
     const avatarImage = req.body.image;
     const userData = await User.findByIdAndUpdate(userId, {
       isAvatarImageSet: true,
-      avatarImage,
+      avatarImage: avatarImage,
     });
     return res.json({
       isSet: userData.isAvatarImageSet,
-      image: userData,
-      avatarImage,
+      image: userData.avatarImage,
     });
   } catch (error) {
     next(error);
