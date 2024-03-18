@@ -1,7 +1,7 @@
 import logo from "../assets/logo.svg";
 import "../public/Contacts.css";
 import { useEffect, useState } from "react";
-
+import "react-router-dom";
 export default function Contacts({ contacts, currUser, handleChatChange }) {
   const [currUserName, setCurrUserName] = useState(undefined);
   const [currUserImage, setCurrUserImage] = useState(undefined);
@@ -35,7 +35,7 @@ export default function Contacts({ contacts, currUser, handleChatChange }) {
                     index === currSelected ? "selected" : ""
                   }`}
                   key={index}
-                  onClick={changeCurrentChat(contact, index)}
+                  onClick={() => changeCurrentChat(index, contact)}
                 >
                   <div className="avatar">
                     <img

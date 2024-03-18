@@ -28,15 +28,20 @@ export default function Chat() {
   useEffect(() => {
     let contactList = async () => {
       if (currUser) {
-        const data = await axios.get(`${allUsersRoute}/${currUser._id}`);
-        setContacts(data.data);
+        if (currUser.isAvatarImageSet) {
+          const data = await axios.get(`${allUsersRoute}/${currUser._id}`);
+          setContacts(data.data);
+        } else {
+          navigate("/setAvatar");
+        }
       }
     };
     contactList();
-  }, []);
+  }, [currUser]);
 
-  const handleChatChange = (chat) => {
-    setCurrChat(chat);
+  const handleChatChange = () => {
+    //  setCurrChat(chat);
+    // console.log(chat);
   };
   return (
     <>
