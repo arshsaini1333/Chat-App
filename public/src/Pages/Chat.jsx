@@ -11,9 +11,10 @@ export default function Chat() {
   const [contacts, setContacts] = useState([]);
   const [currUser, setCurrUser] = useState(undefined);
   const navigate = useNavigate();
-  const [currChat, setCurrChat] = useState(undefined);
+  const [currChat, setCurrChat] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   //If there is no user Return to the Login Page
+
   useEffect(() => {
     const currUserIn = async () => {
       if (!localStorage.getItem("chat-aap-user")) {
@@ -53,10 +54,14 @@ export default function Chat() {
             currUser={currUser}
             handleChatChange={handleChatChange}
           />
-          {isLoaded && currChat === undefined ? (
-            <Welcome currUser={currUser} />
+          {isLoaded ? (
+            !currChat ? (
+              <Welcome currUser={currUser} />
+            ) : (
+              <ChatContainer currUser={currUser} selectedChat={currChat} />
+            )
           ) : (
-            <ChatContainer currUser={currUser} />
+            ""
           )}
         </div>
       </div>
