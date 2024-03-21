@@ -4,14 +4,15 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { allUsersRoute } from "../Utils/APIRoutes";
 import Contacts from "../Components/Contacts";
-
+import Welcome from "../Components/Welcome";
+import ChatContainer from "../Components/ChatContainer.jsx";
 //Function
 export default function Chat() {
   const [contacts, setContacts] = useState([]);
   const [currUser, setCurrUser] = useState(undefined);
   const navigate = useNavigate();
   const [currChat, setCurrChat] = useState(undefined);
-
+  const [isLoaded, setIsLoaded] = useState(false);
   //If there is no user Return to the Login Page
   useEffect(() => {
     const currUserIn = async () => {
@@ -19,6 +20,7 @@ export default function Chat() {
         navigate("/login");
       } else {
         setCurrUser(await JSON.parse(localStorage.getItem("chat-aap-user")));
+        setIsLoaded(true);
       }
     };
     currUserIn();
@@ -39,9 +41,8 @@ export default function Chat() {
     contactList();
   }, [currUser]);
 
-  const handleChatChange = () => {
-    //  setCurrChat(chat);
-    // console.log(chat);
+  const handleChatChange = (chat) => {
+    setCurrChat(chat);
   };
   return (
     <>
@@ -52,6 +53,11 @@ export default function Chat() {
             currUser={currUser}
             handleChatChange={handleChatChange}
           />
+          {isLoaded && currChat === undefined ? (
+            <Welcome currUser={currUser} />
+          ) : (
+            <ChatContainer currUser={currUser} />
+          )}
         </div>
       </div>
     </>
