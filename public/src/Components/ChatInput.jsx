@@ -4,10 +4,9 @@ import Picker from "emoji-picker-react";
 import { IoMdSend } from "react-icons/io";
 import { FaSmile } from "react-icons/fa";
 
-export default function ChatInput() {
+export default function ChatInput({ handleSendMsg }) {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [message, setMessage] = useState("");
-  console.log("Outsider Message: " + message);
 
   //EMoji Picker
   const handleEmojiPciker = () => {
@@ -21,6 +20,16 @@ export default function ChatInput() {
   const handleEmojiClick = (emoji) => {
     setMessage((message) => message + emoji.emoji);
   };
+
+  //Sending Message
+  const chatSent = (event) => {
+    event.preventDefault();
+    if (message.length > 0) {
+      handleSendMsg(message);
+      setMessage("");
+    }
+  };
+
   return (
     <div className="ChatInput">
       <div className="emoji">
@@ -35,7 +44,7 @@ export default function ChatInput() {
         )}
       </div>
       <div>
-        <form action="" className="input-container">
+        <form action="" className="input-container" onSubmit={chatSent}>
           <input
             type="text"
             placeholder="Type Your Message"
@@ -43,8 +52,9 @@ export default function ChatInput() {
             onChange={handleChange}
             value={message}
           />
-
-          <IoMdSend className="send" />
+          <button type="submit">
+            <IoMdSend className="send" />
+          </button>
         </form>
       </div>
     </div>

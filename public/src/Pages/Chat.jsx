@@ -1,13 +1,16 @@
 import "../public/Chat.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { allUsersRoute } from "../Utils/APIRoutes";
 import Contacts from "../Components/Contacts";
 import Welcome from "../Components/Welcome";
 import ChatContainer from "../Components/ChatContainer.jsx";
+import { io } from "socket.io-client";
 //Function
 export default function Chat() {
+  const scoket = useRef();
+
   const [contacts, setContacts] = useState([]);
   const [currUser, setCurrUser] = useState(undefined);
   const navigate = useNavigate();
@@ -26,6 +29,13 @@ export default function Chat() {
     };
     currUserIn();
   }, []);
+
+  useEffect(() => {
+    if (currUser) {
+      scoket.current = io(host);
+      scoket.current.emit("add-user", currUser._id);
+    }
+  });
 
   //If there is present any current user only then we call the API
   useEffect(() => {

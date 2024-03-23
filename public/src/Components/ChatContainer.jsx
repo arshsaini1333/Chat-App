@@ -2,10 +2,31 @@ import "../public/ChatContainer.css";
 import Logout from "./Logout";
 import ChatInput from "./ChatInput";
 import Messages from "./Messages.jsx";
+import axios from "axios";
+import { useState, useEffect } from "react";
+import { sendMessageRoute, getMessageRoute } from "../Utils/APIRoutes";
 export default function ChatContainer({ currUser, selectedChat }) {
-  const handleSendMsg = async (msg) => {};
-  {
-  }
+  const handleSendMsg = async (msg) => {
+    await axios.post(sendMessageRoute, {
+      from: currUser._id,
+      to: selectedChat._id,
+      message: msg,
+    });
+  };
+
+  const [msgs, setMsgs] = useState([]);
+
+  useEffect(() => {
+    const f = async () => {
+      const response = await axios.post(getMessageRoute, {
+        from: currUser._id,
+        to: selectedChat._id,
+      });
+      setMsgs(response.data);
+    };
+    f();
+  }, [selectedChat]);
+
   return (
     <>
       <div className="ChatContainer">
@@ -23,8 +44,9 @@ export default function ChatContainer({ currUser, selectedChat }) {
           </div>
           <Logout />
         </div>
-        <div className="chat-messages"></div>
-        <Messages />
+        {/* <div className="chat-messages"></div> */}
+        <Messages msgs={msgs} />
+
         <ChatInput handleSendMsg={handleSendMsg} />
       </div>
     </>
