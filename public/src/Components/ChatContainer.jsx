@@ -3,18 +3,14 @@ import Logout from "./Logout";
 import ChatInput from "./ChatInput";
 import Messages from "./Messages.jsx";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { sendMessageRoute, getMessageRoute } from "../Utils/APIRoutes";
-export default function ChatContainer({ currUser, selectedChat }) {
-  const handleSendMsg = async (msg) => {
-    await axios.post(sendMessageRoute, {
-      from: currUser._id,
-      to: selectedChat._id,
-      message: msg,
-    });
-  };
-
+import { v4 as uuidv4, v4 } from "uuid";
+//Function
+export default function ChatContainer({ currUser, selectedChat, socket }) {
   const [msgs, setMsgs] = useState([]);
+  const [arrivalMsg, setArrivalMsg] = useState(null);
+  const scrollRef = new useRef();
 
   useEffect(() => {
     const f = async () => {
@@ -26,6 +22,49 @@ export default function ChatContainer({ currUser, selectedChat }) {
     };
     f();
   }, [selectedChat]);
+
+  useEffect(() => {
+    const getCurrentChat = async () => {
+      if (selectedChat) {
+        await JSON.parse(localStorage.getItem("chat-aap-user"))._id;
+      }
+    };
+    getCurrentChat();
+  }, [selectedChat]);
+
+  //Sending Message
+  const handleSendMsg = async (msg) => {
+    await axios.post(sendMessageRoute, {
+      from: currUser._id,
+      to: selectedChat._id,
+      message: msg,
+    });
+    socket.current.emit("send-msg", {
+      to: selectedChat._id,
+      from: currUser._id,
+      message: msg,
+    });
+    const messages = [...msgs];
+    messages.push({ fromSelf: true, message: msg });
+    setMsgs(messages);
+  };
+
+  useEffect(() => {
+    if (socket.current) {
+      socket.current.on("msg-recieve", (msg) => {
+        console.log({ msg });
+        setArrivalMsg({ fromSelf: false, message: msg });
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    arrivalMsg && setMsgs((prev) => [...prev, arrivalMsg]);
+  }, [arrivalMsg]);
+
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [msgs]);
 
   return (
     <>
@@ -45,9 +84,13 @@ export default function ChatContainer({ currUser, selectedChat }) {
           <Logout />
         </div>
         {/* <div className="chat-messages"></div> */}
-        <Messages msgs={msgs} />
 
-        <ChatInput handleSendMsg={handleSendMsg} />
+        <Messages msgs={msgs} uuidv4={uuidv4} scrollRef={scrollRef} />
+
+        <ChatInput
+          handleSendMsg={handleSendMsg}
+          setArrivalMsg={setArrivalMsg}
+        />
       </div>
     </>
   );

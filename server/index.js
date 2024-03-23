@@ -25,24 +25,26 @@ const server = app.listen(process.env.PORT, () => {
   console.log(`Server listning to port ${process.env.PORT}`);
 });
 
+// const io = socket(server, {
+//React Server
 const io = socket(server, {
-  cosr: {
-    origin: "http://localhost:5000/",
+  cors: {
+    origin: "http://localhost:5173",
     credentials: true,
   },
 });
 
 global.onlineUsers = new Map();
-io.on("connections", (socket) => {
+io.on("connection", (socket) => {
   global.chatSocket = socket;
   socket.on("add-user", (userId) => {
-    onlineUsers.set(userId, socket.socket.id);
+    onlineUsers.set(userId, socket.id);
   });
 
   socket.on("send-msg", (data) => {
     const sendUserSocket = onlineUsers.get(data.to);
     if (sendUserSocket) {
-      socket.to(sendUserSocket).emit("msg-recieve", data.msg);
+      socket.to(sendUserSocket).emit("msg-recieve", data.message);
     }
   });
 });

@@ -1,11 +1,19 @@
 .ChatInput {
+  /* height: 100vh; */
+  bottom: 0;
+  margin-top: 4px;
   display: grid;
   grid-template-columns: 5% 95%;
+  /* display: flex;
+  justify-content: space-between; */
   align-items: center;
   background-color: #080420;
-  padding: 0 2rem;
-  padding-bottom: 0.3rem;
+  /* background-color: red; */
+  padding: 0.3rem 2rem;
+  /* padding-bottom: 0.3rem; */
   height: 8%;
+  /* position: absolute; */
+  /* bottom: 0px; */
 }
 
 .send {
@@ -48,16 +56,15 @@
   .epr-emoji-category-label {
     background-color: #080420;
   }
-  input {
-    background-color: transparent;
-    border-color: #9a86f3;
-  }
+}
+
+input {
+  background-color: transparent;
+  border-color: #9a86f3;
 }
 
 .input-container {
-  margin-top: 5px;
   width: 100%;
-  /* height: 70%; */
   border-radius: 2rem;
   display: flex;
   align-items: center;
@@ -88,4 +95,10 @@
 .input-container button {
   border: none;
   background-color: transparent;
+}
+
+@media screen and (max-width: 1000px) {
+  .input-container {
+    margin-left: 1rem;
+  }
 }

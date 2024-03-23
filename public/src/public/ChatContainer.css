@@ -1,5 +1,7 @@
-.ChatContainer .ChatContainer {
+.ChatContainer {
   padding-top: 1rem;
+  /* display: grid;
+  grid-template-rows: 10% 75% 15%; */
 }
 
 .chat-header {

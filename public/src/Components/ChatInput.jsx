@@ -1,5 +1,5 @@
 import "../public/ChatInput.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Picker from "emoji-picker-react";
 import { IoMdSend } from "react-icons/io";
 import { FaSmile } from "react-icons/fa";

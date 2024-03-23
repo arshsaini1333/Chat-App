@@ -11,7 +11,7 @@ button {
 }
 
 body {
-  max-height: 100vh;
+  max-height: 100%;
   overflow: hidden;
   max-width: 100%;
 }

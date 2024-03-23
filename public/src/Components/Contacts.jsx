@@ -25,6 +25,7 @@ export default function Contacts({ contacts, currUser, handleChatChange }) {
         <div className="Contact">
           <div className="brand">
             <img src={logo} alt="Logo" />
+
             <h3>Chit-Chat</h3>
           </div>
           <div className="contacts">
