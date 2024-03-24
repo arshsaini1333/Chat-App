@@ -10,7 +10,7 @@ require("dotenv").config();
 app.use(
   cors({
     // origin: "http://localhost:5173",
-    origin: "https://chat-app-frontend-drab.vercel.app",
+    origin: "https://chat-app-frontend-drab.vercel.app/login",
     methods: ["GET", "POST"],
     credentials: true,
   })
