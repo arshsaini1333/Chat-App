@@ -1,4 +1,4 @@
-export const host = "chat-app-by-arsh.vercel.app";
+export const host = "https://chat-app-by-arsh.vercel.app/";
 // export const host = "http://localthost:5000";
 export const registerRoute = `${host}/api/auth/register`;
 export const loginRoute = `${host}/api/auth/login`;
