@@ -17,7 +17,9 @@ app.use(
 app.use(express.json());
 app.use("/api/auth", userRoutes);
 app.use("/api/messages", messageRoutes);
-
+app.get("/", (req, res) => {
+  res.send("Hello");
+});
 mongoose
   .connect(process.env.MONGO_URL)
   .then(() => {
