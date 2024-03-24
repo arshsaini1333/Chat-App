@@ -10,7 +10,7 @@ require("dotenv").config();
 app.use(
   cors({
     // origin: "http://localhost:5173",
-    origin: "https://chat-app-frontend-drab.vercel.app/login",
+    origin: "https://chat-app-frontend-drab.vercel.app",
     methods: ["GET", "POST"],
     credentials: true,
   })
@@ -38,7 +38,7 @@ const server = app.listen(process.env.PORT, () => {
 //React Server
 const io = socket(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: "https://chat-app-frontend-drab.vercel.app",
     credentials: true,
   },
 });
