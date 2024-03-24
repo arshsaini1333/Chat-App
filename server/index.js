@@ -8,12 +8,13 @@ const socket = require("socket.io");
 require("dotenv").config();
 
 app.use(
-  cors({
-    // origin: "http://localhost:5173",
-    origin: "https://chat-app-frontend-drab.vercel.app",
-    methods: ["GET", "POST"],
-    credentials: true,
-  })
+  cors()
+  // {
+  //   origin: "http://localhost:5173",
+  //   // origin: "https://chat-app-frontend-drab.vercel.app",
+  //   methods: ["GET", "POST"],
+  //   credentials: true,
+  // }
 );
 app.use(express.json());
 app.use("/api/auth", userRoutes);
@@ -38,7 +39,9 @@ const server = app.listen(process.env.PORT, () => {
 //React Server
 const io = socket(server, {
   cors: {
-    origin: "https://chat-app-frontend-drab.vercel.app",
+    // origin: "https://chat-app-frontend-drab.vercel.app",
+    origin: "http://localhost:5173",
+
     credentials: true,
   },
 });
