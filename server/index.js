@@ -7,16 +7,15 @@ const app = express();
 const socket = require("socket.io");
 require("dotenv").config();
 
-app.use(
-  cors({
-    // origin: "http://localhost:5173",
-    origin:
-      "https://66059f956ed66b39f04e5393--luminous-profiterole-8a56e6.netlify.app",
-    // origin: "https://chat-app-frontend-drab.vercel.app",
-    methods: ["GET", "POST"],
-    credentials: true,
-  })
-);
+app.use(cors());
+// {
+//   // origin: "http://localhost:5173",
+//   origin:
+//     "https://66059f956ed66b39f04e5393--luminous-profiterole-8a56e6.netlify.app",
+//   // origin: "https://chat-app-frontend-drab.vercel.app",
+//   methods: ["GET", "POST"],
+//   credentials: true,
+// }
 
 app.use(express.json());
 app.use("/api/auth", userRoutes);
