@@ -8,6 +8,7 @@ const socket = require("socket.io");
 require("dotenv").config();
 
 app.use(cors());
+
 // {
 //   origin: "http://localhost:5173",
 //   // origin: "https://chat-app-frontend-drab.vercel.app",
@@ -34,13 +35,10 @@ const server = app.listen(process.env.PORT, () => {
   console.log(`Server listning to port ${process.env.PORT}`);
 });
 
-// const io = socket(server, {
 //React Server
 const io = socket(server, {
   cors: {
-    // origin: "http://localhost:5173",
-    origin: "https://chat-app-by-arsh.netlify.app",
-
+    origin: "http://localhost:5173",
     credentials: true,
   },
 });
