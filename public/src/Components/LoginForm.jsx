@@ -1,5 +1,6 @@
 import "../public/Register.css";
 import logo from "../assets/logo.svg";
+import { Link } from "react-router-dom";
 
 export default function LoginForm({ handleSubmit, handleChange, values }) {
   return (
@@ -27,7 +28,10 @@ export default function LoginForm({ handleSubmit, handleChange, values }) {
 
         <button type="submit">Login</button>
         <span>
-          Don't have an account ? <a href="/register">Register</a>
+          Don't have an account ?{" "}
+          <Link to="/register" className="link">
+            Create One.
+          </Link>
         </span>
       </form>
     </div>

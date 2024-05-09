@@ -1,5 +1,6 @@
 import "../public/Register.css";
 import logo from "../assets/logo.svg";
+import { Link } from "react-router-dom";
 
 export default function RegisterForm({ handleSubmit, handleChange, values }) {
   return (
@@ -39,7 +40,10 @@ export default function RegisterForm({ handleSubmit, handleChange, values }) {
         />
         <button type="submit">Create User</button>
         <span>
-          Already have an account ? <a href="/login">Login</a>
+          Already have an account ?{" "}
+          <Link to="/login" className="link">
+            Login
+          </Link>
         </span>
       </form>
     </div>
