@@ -39,7 +39,7 @@ const server = app.listen(process.env.PORT, () => {
 //React Server
 const io = socket(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: "https://chat-9lc8431tw-arshsaini1333s-projects.vercel.app",
     credentials: true,
   },
 });
