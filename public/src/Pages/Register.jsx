@@ -39,7 +39,6 @@ export default function Register() {
       if (!data.status) {
         toast.error(data.msg, toastOpt);
       } else {
-        console.log("Hello3");
         localStorage.setItem("chat-aap-user", JSON.stringify(data.user));
         navigate("/setAvatar");
       }
