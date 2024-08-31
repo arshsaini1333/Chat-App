@@ -58,20 +58,26 @@ export default function Chat() {
   return (
     <>
       <div className="Chat">
-        <div className="container">
+        <div id={!currChat?"container1":"container2"} className="container">
           <Contacts
+          className="Contacts"
             contacts={contacts}
             currUser={currUser}
             handleChatChange={handleChatChange}
+            
           />
           {isLoaded ? (
             !currChat ? (
-              <Welcome currUser={currUser} />
+              <Welcome currUser={currUser} 
+              className="Welcome"
+              />
             ) : (
               <ChatContainer
+              className="ChatContainer"
                 currUser={currUser}
                 selectedChat={currChat}
                 socket={socket}
+                
               />
             )
           ) : (
