@@ -26,7 +26,7 @@ export default function Contacts({ contacts, currUser, handleChatChange }) {
           <div className="brand">
             <img src={logo} alt="Logo" />
 
-            <h3>Chit-Chats</h3>
+            <h3>Chit-Chatssss</h3>
           </div>
           <div className="contacts">
             {contacts.map((contact, index) => {
