@@ -1,89 +1,90 @@
 .Contact {
-  /* height: 100%; */
-  display: grid;
-  grid-template-rows: 10% 75% 15%;
-  overflow: hidden;
-  background-color: #080420;
+    /* height: 100%; */
+    display: grid;
+    grid-template-rows: 10% 75% 15%;
+    overflow: hidden;
+    background-color: #080420;
 }
 
 .Contact .brand {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .Contact .brand img {
-  height: 2rem;
-  margin-right: 5%;
+    height: 2rem;
+    margin-right: 5%;
 }
 
 .Contact .brand h3 {
-  text-transform: uppercase;
-  color: white;
+    text-transform: uppercase;
+    color: white;
 }
 
 .Contact .contacts {
-  display: flex;
-  flex-direction: column;
-  overflow: auto;
-  gap: 0.8rem;
-  align-items: center;
-  &::-webkit-scrollbar {
-    width: 0.2rem;
-  }
-  &::-webkit-scrollbar-thumb {
-    background-color: #ffffff39;
-    width: 0.1rem;
-    border-radius: 1rem;
-  }
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    gap: 0.8rem;
+    align-items: center;
+    &::-webkit-scrollbar {
+        width: 0.2rem;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: #ffffff39;
+        width: 0.1rem;
+        border-radius: 1rem;
+    }
 }
 
 .Contact .contact {
-  display: flex;
-  background-color: #ffffff39;
-  min-height: 5rem;
-  width: 90%;
-  cursor: pointer;
-  border-radius: 0.2rem;
-  padding: 0.4rem;
-  gap: 1rem;
-  align-items: center;
-  transition: 0.5s ease-in;
-  text-wrap: wrap;
+    display: flex;
+    background-color: #ffffff39;
+    min-height: 5rem;
+    width: 90%;
+    cursor: pointer;
+    border-radius: 0.2rem;
+    padding: 0.4rem;
+    gap: 1rem;
+    align-items: center;
+    transition: 0.5s ease-in;
+    text-wrap: wrap;
+    word-break: break-all;
 }
 
 .Contact .avatar img {
-  height: 3rem !important;
+    height: 3rem !important;
 }
 
 .Contact .username h3 {
-  color: white;
+    color: white;
 }
 
 .Contact .selected {
-  background-color: #9186f3;
+    background-color: #9186f3;
 }
 
 .Contact .curr-user {
-  background-color: #0d0d30;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* gap: 2rem; */
-  gap: 1%;
-  .avatar {
-    img {
-      height: 4rem !important;
-      /* max-inline-size: 100%; */
+    background-color: #0d0d30;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* gap: 2rem; */
+    gap: 1%;
+    .avatar {
+        img {
+            height: 4rem !important;
+            /* max-inline-size: 100%; */
+        }
     }
-  }
-  .username {
-    h2 {
-      color: white !important;
+    .username {
+        h2 {
+            color: white !important;
+        }
     }
-  }
 }
 
 .Contact .contact:hover {
-  background-color: #9186f3;
+    background-color: #9186f3;
 }

@@ -8,13 +8,12 @@ const socket = require("socket.io");
 require("dotenv").config();
 
 app.use(
-  cors({
-    // origin: "http://localhost:5173",
-    origin: "https://chat-app-black-rho.vercel.app",
-    // origin: "https://chat-app-frontend-drab.vercel.app",
-    methods: ["GET", "POST"],
-    credentials: true,
-  })
+    cors({
+        // origin: "http://localhost:5173",
+        origin: "https://chat-app-black-rho.vercel.app",
+        methods: ["GET", "POST"],
+        credentials: true,
+    })
 );
 //
 
@@ -22,40 +21,41 @@ app.use(express.json());
 app.use("/api/auth", userRoutes);
 app.use("/api/messages", messageRoutes);
 app.get("/", (req, res) => {
-  res.send("Hiii");
+    res.send("Hiii");
 });
 mongoose
-  .connect(process.env.MONGO_URL)
-  .then(() => {
-    console.log("MongoDB Connect");
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+    .connect(process.env.MONGO_URL)
+    .then(() => {
+        console.log("MongoDB Connect");
+    })
+    .catch((err) => {
+        console.log(err);
+    });
 
 const server = app.listen(process.env.PORT, () => {
-  console.log(`Server listning to port ${process.env.PORT}`);
+    console.log(`Server listning to port ${process.env.PORT}`);
 });
 
 //React Server
 const io = socket(server, {
-  cors: {
-    origin: "https://chat-app-black-rho.vercel.app",
-    credentials: true,
-  },
+    cors: {
+        origin: "https://chat-app-black-rho.vercel.app",
+        // origin: "http://localhost:5173",
+        credentials: true,
+    },
 });
 
 global.onlineUsers = new Map();
 io.on("connection", (socket) => {
-  global.chatSocket = socket;
-  socket.on("add-user", (userId) => {
-    onlineUsers.set(userId, socket.id);
-  });
+    global.chatSocket = socket;
+    socket.on("add-user", (userId) => {
+        onlineUsers.set(userId, socket.id);
+    });
 
-  socket.on("send-msg", (data) => {
-    const sendUserSocket = onlineUsers.get(data.to);
-    if (sendUserSocket) {
-      socket.to(sendUserSocket).emit("msg-recieve", data.message);
-    }
-  });
+    socket.on("send-msg", (data) => {
+        const sendUserSocket = onlineUsers.get(data.to);
+        if (sendUserSocket) {
+            socket.to(sendUserSocket).emit("msg-recieve", data.message);
+        }
+    });
 });
