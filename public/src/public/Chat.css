@@ -30,3 +30,24 @@
     grid-template-columns: 35% 65%;
   }
 }
+
+
+@media screen and (max-width: 500px) {
+    #container1 {
+        width: 100%;
+        grid-template-columns: 100% 0%;
+    }
+    .Welcome {
+        display: block !important;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    #container2 {
+        width: 100%;
+        grid-template-columns: 0% 100%;
+    }
+    .Contacts {
+        display: block !important;
+    }
+}
