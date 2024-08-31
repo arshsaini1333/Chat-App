@@ -37,6 +37,26 @@
         grid-template-columns: 100% 0%;
     }
     .Welcome {
+        display: none !important;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    #container2 {
+        width: 100%;
+        grid-template-columns: 0% 100%;
+    }
+    .Contacts {
+        display: none !important;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    #container1 {
+        width: 100%;
+        grid-template-columns: 100% 0%;
+    }
+    .Welcome {
         display: block !important;
     }
 }
