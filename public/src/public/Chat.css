@@ -38,8 +38,8 @@
         grid-template-columns: 100% 0%;
     }
     .Welcome {
-      width: 0%;
-        display: block !important;
+      
+        display: none !important;
     }
 }
 
@@ -49,7 +49,7 @@
         grid-template-columns: 0% 100%;
     }
     .Contacts {
-      width: 0%;
-        display: block !important;
+      
+        display: none !important;
     }
 }
