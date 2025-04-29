@@ -1,73 +1,69 @@
-import { useNavigate } from "react-router-dom";
-import { setAvatarRoute } from "../Utils/APIRoutes";
-import { useState, useEffect } from "react";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import SetAvatarPage from "../Components/SetAvatarPage";
-import { toastOpt } from "../Utils/Register";
-import { Buffer } from "buffer";
+import {setAvatarRoute} from "../Utils/APIRoutes"
+import { useNavigate } from "react-router-dom";
+
 
 export default function SetAvatar() {
   const navigate = useNavigate();
-
+  
   const [avatars, setAvatars] = useState([]);
+  const [selectedAvatar, setSelectedAvatar] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [selectedAvatar, setSelectedAvatar] = useState(undefined);
+
   useEffect(() => {
-    const avatarfun = async () => {
-      if (!localStorage.getItem("chat-aap-user")) {
-        navigate("/login");
+    const fetchAvatars = async () => {
+      const data = [];
+      for (let i = 0; i < 4; i++) {
+        const res = await axios.get(`https://api.dicebear.com/8.x/pixel-art/svg?seed=${Math.round(Math.random() * 1000)}`);
+        const base64 = btoa(unescape(encodeURIComponent(res.data)));
+        // console.log(base64)
+        data.push(`data:image/svg+xml;base64,${base64}`);
       }
+      setAvatars(data);
+      setIsLoading(false);
     };
-    avatarfun();
+
+    fetchAvatars();
   }, []);
 
-  const api = "https://api.multiavatar.com/45678945";
   const setProfilePicture = async () => {
-    if (selectedAvatar === undefined) {
-      toast.error("Please Select an avatar", toastOpt);
-    } else {
-      const user = await JSON.parse(localStorage.getItem("chat-aap-user"));
-      const { data } = await axios.post(`${setAvatarRoute}/${user._id}`, {
-        image: avatars[selectedAvatar],
+    if (selectedAvatar === null) {
+      alert("Please select an avatar");
+      return;
+    }
+
+    const user = await JSON.parse(localStorage.getItem("chat-aap-user"));
+
+    const ogA = avatars[selectedAvatar];
+    const avatar = ogA.substring(26);
+
+    const userId = user._id; // or from context/state
+
+    try {
+      const { data } =  await axios.post(setAvatarRoute, {
+        avatar,
+        userId,
       });
       if (data.isSet) {
         user.isAvatarImageSet = true;
         user.avatarImage = data.image;
         localStorage.setItem("chat-aap-user", JSON.stringify(user));
         navigate("/");
-      } else {
-        toast.error("Error Setting Avatar. Please try again", toastOpt);
-      }
+      } 
+    } catch (error) {
+      console.error("❌ Error saving avatar:", error);
     }
   };
 
-  useEffect(() => {
-    async function setImage() {
-      const data = [];
-      for (let i = 0; i < 4; i++) {
-        const image = await axios.get(
-          `${api}/${Math.floor(Math.random() * 1000)}`
-        );
-        const buffer = new Buffer(image.data);
-        data.push(buffer.toString("base64"));
-      }
-      setAvatars(data);
-      setIsLoading(false);
-    }
-    setImage();
-  }, []);
   return (
-    <>
-      <SetAvatarPage
-        avatars={avatars}
-        selectedAvatar={selectedAvatar}
-        setSelectedAvatar={setSelectedAvatar}
-        setProfilePicture={setProfilePicture}
-        isLoading={isLoading}
-      />
-      <ToastContainer />
-    </>
+    <SetAvatarPage
+      avatars={avatars}
+      selectedAvatar={selectedAvatar}
+      setSelectedAvatar={setSelectedAvatar}
+      setProfilePicture={setProfilePicture}
+      isLoading={isLoading}
+    />
   );
 }
